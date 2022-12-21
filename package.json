@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-native": "0.71.0-rc.5"
+    "react-native": "0.71.0-rc.5",
+    "react-native-screens": "3.18.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
