@@ -1,0 +1,42 @@
+name: Android
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup JDK 18
+        uses: actions/setup-java@v3.4.1
+        with:
+          java-version: 18
+          distribution: temurin
+          cache: 'gradle'
+
+      - name: Install deps
+        run: yarn
+
+      - name: Build Debug
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          arguments: assembleDebug
+          build-root-directory: android
+
+      - name: Clean
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          arguments: clean
+          build-root-directory: android
+
+      - name: Build Release
+        uses: gradle/gradle-build-action@v2.2.2
+        with:
+          arguments: assembleRelease
+          build-root-directory: android
